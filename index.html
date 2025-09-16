@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ShreemantYogi Production</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1:#050c1b; --bg-2:#071023; --accent:#ff7a18; --muted:#9aa4b2; --card:#0f1720;
+      --glass: rgba(255,255,255,0.04);
+      --max-w:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#fff; -webkit-font-smoothing:antialiased}
+    .container{max-width:var(--max-w);margin:0 auto;padding:28px}
+
+    /* NAV */
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,rgba(7,16,35,0.7),rgba(7,16,35,0.45));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{width:52px;height:52px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+    .brand h1{font-family:'Playfair Display',serif;margin:0;font-size:20px;letter-spacing:0.6px}
+    .brand p{margin:0;color:var(--muted);font-size:13px}
+    nav a{color:rgba(255,255,255,0.92);text-decoration:none;margin:0 10px;font-weight:600}
+    .cta{background:var(--accent);color:#071023;padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}
+
+    /* HERO */
+    .hero{display:flex;gap:32px;align-items:center;padding:60px 0}
+    .hero .left{flex:1}
+    .hero h2{font-family:'Playfair Display',serif;font-size:48px;margin:0 0 14px;line-height:1.02;background:linear-gradient(90deg,var(--accent),#ffd66b);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{color:var(--muted);max-width:620px}
+    .btns{margin-top:22px}
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;margin-right:12px;text-decoration:none;font-weight:700}
+    .btn-primary{background:var(--accent);color:#071023}
+    .btn-ghost{border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    .showreel{flex:1;max-width:640px}
+    .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(2,6,23,0.7)}
+    .video{width:100%;height:360px;border:0}
+
+    /* Services */
+    .section{padding:64px 0}
+    .grid{display:grid;gap:18px}
+    .services .grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .service{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .35s,box-shadow .35s}
+    .service:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,0.6);border-color:rgba(255,125,24,0.18)}
+
+    /* News */
+    .news .item{padding:20px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03)}
+    .news .date{color:var(--muted);font-size:13px}
+    .news h4{margin:6px 0;color:var(--accent)}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+    .gallery img{width:100%;height:200px;object-fit:cover;border-radius:10px;display:block;transition:transform .4s,filter .4s}
+    .gallery img:hover{transform:scale(1.04);filter:brightness(1.05)}
+
+    /* Team */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+    .member{background:var(--glass);padding:18px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.03)}
+    .avatar{width:86px;height:86px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#071023;background:linear-gradient(90deg,var(--accent),#ffd66b)}
+    .role{color:var(--muted);font-size:13px}
+
+    /* Contact */
+    footer{padding:56px 0;background:linear-gradient(180deg,rgba(0,0,0,0.05),transparent)}
+    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:24px}
+    .field{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);background:transparent;color:inherit}
+    .submit{background:var(--accent);color:#071023;padding:12px 16px;border-radius:10px;border:0;font-weight:700}
+
+    /* Footer small */
+    .small{color:var(--muted);text-align:center;margin-top:28px;font-size:14px}
+
+    /* responsive */
+    @media(max-width:900px){.hero{flex-direction:column}.video{height:220px}.contact-grid{grid-template-columns:1fr}.container{padding:18px}}
+
+    /* simple fade-in on scroll */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+    .reveal.in-view{opacity:1;transform:none}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img src="/assets/logo.png" alt="logo">
+        <div>
+          <h1>ShreemantYogi Production</h1>
+          <p>Cinematic Films • Ad Films • Post Production</p>
+        </div>
+      </div>
+      <nav class="desktop">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#news">News</a>
+        <a href="#team">Team</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="container hero">
+      <div class="left reveal">
+        <h2>We craft stories that move people</h2>
+        <p>Full-service production house focused on films, advertisements, music videos and end-to-end post production. Our first major project <strong>Konkan Scales</strong> is currently in production.</p>
+        <div class="btns">
+          <a class="btn btn-primary" href="#work">Watch Showreel</a>
+          <a class="btn btn-ghost" href="#services">Our Services</a>
+        </div>
+        <div style="margin-top:22px;color:var(--muted)">50+ Projects • 10 Years • 20+ Awards • 100+ Clients</div>
+      </div>
+      <div class="showreel reveal">
+        <div class="card">
+          <iframe class="video" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="container section services reveal">
+      <h3 style="font-size:32px;margin-bottom:18px">Our Services</h3>
+      <div class="grid">
+        <div class="service">Film & Ad Production — Concept to screen</div>
+        <div class="service">Music Videos — Creative direction & production</div>
+        <div class="service">Event Coverage — Live & recorded events</div>
+        <div class="service">Post Production — Editing, VFX, Sound, Color Grading</div>
+        <div class="service">Casting & Talent Management</div>
+      </div>
+    </section>
+
+    <section id="news" class="container section news reveal">
+      <h3 style="font-size:32px;margin-bottom:18px">News & Updates</h3>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+        <article class="item">
+          <div class="date">Aug 2025</div>
+          <h4>ShreemantYogi kicks off first feature film — Konkan Scales</h4>
+          <p style="color:var(--muted)">Our first big project is officially underway, capturing the cultural beauty of Konkan.</p>
+        </article>
+
+        <article class="item">
+          <div class="date">Sep 2025</div>
+          <h4>Office Expansion in Thane</h4>
+          <p style="color:var(--muted)">We are growing! New office space at Savitri Tower, Kalwa.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery" class="container section reveal">
+      <h3 style="font-size:32px;margin-bottom:18px">Gallery</h3>
+      <div class="gallery">
+        <img src="/assets/gallery1.png" alt="gallery 1">
+        <img src="/assets/gallery2.png" alt="gallery 2">
+        <img src="/assets/gallery3.png" alt="gallery 3">
+        <img src="/assets/gallery4.png" alt="gallery 4">
+        <img src="/assets/gallery5.png" alt="gallery 5">
+        <img src="/assets/gallery6.png" alt="gallery 6">
+      </div>
+    </section>
+
+    <section id="team" class="container section reveal">
+      <h3 style="font-size:32px;margin-bottom:18px">Team</h3>
+      <div class="team-grid">
+        <div class="member">
+          <div class="avatar">NP</div>
+          <div style="font-weight:700">Nilesh Pawar</div>
+          <div class="role">Founder & Director</div>
+        </div>
+        <div class="member">
+          <div class="avatar">TV</div>
+          <div style="font-weight:700">Tanmay Vanghule</div>
+          <div class="role">Head of Production</div>
+        </div>
+        <div class="member">
+          <div class="avatar">RK</div>
+          <div style="font-weight:700">Riyaz Khan</div>
+          <div class="role">Head of Production</div>
+        </div>
+        <div class="member">
+          <div class="avatar">AS</div>
+          <div style="font-weight:700">Ahsan Shaikh</div>
+          <div class="role">Online Work Manager</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="container section reveal">
+      <h3 style="font-size:32px;margin-bottom:18px">Our Work</h3>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+        <div class="item" style="padding:18px;border-radius:10px;background:var(--card);border:1px solid rgba(255,255,255,0.03)">
+          <div style="font-size:14px;color:var(--muted)">2025 • Feature Film (In Production)</div>
+          <h4 style="margin:8px 0;color:var(--accent)">Konkan Scales</h4>
+          <p style="color:var(--muted)">Cultural drama set across the Konkan coast — currently shooting.</p>
+          <div style="margin-top:12px"><a class="btn btn-ghost" href="#contact">Join Production</a></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="reveal">
+          <h3 style="font-size:24px;margin:0 0 8px">Contact Us</h3>
+          <p style="color:var(--muted);margin:0 0 12px">For collaborations, bookings, or press — reach out and we'll respond within 48 hours.</p>
+          <div style="color:var(--muted);margin-bottom:12px">📍 Savitri Tower 202, Bhusarali, Kalwa, Thane 400605<br>📞 +91 99673 63589<br>✉️ hello@shreemantyogi.com</div>
+          <div style="display:flex;gap:8px">
+            <a class="btn btn-ghost" href="#">Instagram</a>
+            <a class="btn btn-ghost" href="#">YouTube</a>
+            <a class="btn btn-ghost" href="#">LinkedIn</a>
+          </div>
+        </div>
+
+        <form class="reveal" onsubmit="event.preventDefault();alert('Form submitted - hook up your backend');">
+          <input class="field" placeholder="Your name" required>
+          <div style="height:12px"></div>
+          <input class="field" type="email" placeholder="Email" required>
+          <div style="height:12px"></div>
+          <input class="field" placeholder="Phone (optional)">
+          <div style="height:12px"></div>
+          <textarea class="field" rows="6" placeholder="Brief about the project" required></textarea>
+          <div style="height:12px"></div>
+          <button class="submit" type="submit">Send Message</button>
+        </form>
+      </div>
+
+      <div class="small">© 2025 ShreemantYogi Production — All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // small script to reveal elements on scroll
+    (function(){
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e=>{
+          if(e.isIntersecting) e.target.classList.add('in-view');
+        });
+      },{threshold:0.12});
+
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+      // smooth links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click',e=>{
+          const href=a.getAttribute('href');
+          if(href.length>1){
+            e.preventDefault();document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
+          }
+        })
+      })
+    })();
+  </script>
+</body>
+</html>
