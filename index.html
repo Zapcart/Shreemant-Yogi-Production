@@ -30,14 +30,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
     :root {
-      --bg-1: #050c1b;
-      --bg-2: #071023;
-      --accent: #ff7a18;
-      --muted: #b0b8c5;
-      --card: #0f1720;
-      --glass: rgba(255,255,255,0.06);
-      --max-w: 1280px;
-      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --bg-1: #0a0f24;
+      --bg-2: #1a2238;
+      --accent: #ff8c00;
+      --accent-light: #ffb347;
+      --muted: #c4cdd5;
+      --card: #141b2d;
+      --glass: rgba(255,255,255,0.08);
+      --max-w: 1320px;
+      --shadow: 0 12px 32px rgba(0,0,0,0.5);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -55,181 +56,260 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: linear-gradient(180deg, rgba(7,16,35,0.85), rgba(7,16,35,0.6));
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: linear-gradient(180deg, rgba(10,15,36,0.9), rgba(10,15,36,0.7));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; }
     .brand { display: flex; align-items: center; gap: 16px; }
-    .brand img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow); }
-    .brand h1 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; letter-spacing: 0.5px; }
+    .brand img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow); }
+    .brand h1 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.5px; }
     .brand p { font-size: 14px; color: var(--muted); font-weight: 400; }
-    nav a { color: rgba(255,255,255,0.95); text-decoration: none; margin: 0 12px; font-size: 16px; font-weight: 500; transition: color 0.3s ease; }
-    nav a:hover { color: var(--accent); }
-    .cta {
-      background: var(--accent);
-      color: #071023;
-      padding: 12px 20px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 16px;
-      text-decoration: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* Hamburger Menu */
+    #hamburger-input { display: none; }
+    #hamburger-menu {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: linear-gradient(
+        to bottom, 
+        var(--accent) 0%, var(--accent) 20%, 
+        transparent 20%, transparent 40%, 
+        var(--accent) 40%, var(--accent) 60%, 
+        transparent 60%, transparent 80%, 
+        var(--accent) 80%, var(--accent) 100%
+      );
+      cursor: pointer;
+      transition: opacity 0.3s;
     }
-    .cta:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,122,24,0.3); }
+    #hamburger-menu:hover { opacity: 0.8; }
+    #sidebar-menu {
+      visibility: hidden;
+      position: fixed;
+      top: 0;
+      right: -280px;
+      width: 280px;
+      height: 100%;
+      background: var(--bg-2);
+      padding: 80px 24px 24px;
+      transition: right 0.4s ease;
+      z-index: 60;
+      box-shadow: -12px 0 24px rgba(0,0,0,0.5);
+    }
+    #sidebar-menu ul { list-style: none; }
+    #sidebar-menu a {
+      display: block;
+      color: #fff;
+      font-size: 18px;
+      padding: 14px 0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s;
+    }
+    #sidebar-menu a:hover { color: var(--accent); transform: translateX(8px); }
+    #hamburger-input:checked + #hamburger-menu #sidebar-menu {
+      visibility: visible;
+      right: 0;
+    }
+    #hamburger-input:checked ~ .overlay {
+      visibility: visible;
+      opacity: 1;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 55;
+    }
 
     /* HERO */
-    .hero { display: flex; gap: 40px; align-items: center; padding: 80px 0; }
-    .hero .left { flex: 1; }
+    .hero { position: relative; padding: 100px 0; text-align: center; }
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+      z-index: -1;
+    }
+    .hero .left { max-width: 800px; margin: 0 auto; }
     .hero h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 56px;
+      font-size: 64px;
       font-weight: 700;
-      margin: 0 0 16px;
+      margin: 0 0 20px;
       line-height: 1.1;
-      background: linear-gradient(90deg, var(--accent), #ffd66b);
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
-    .hero p { color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 680px; font-weight: 400; }
-    .btns { margin-top: 24px; }
+    .hero p { color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 700px; margin: 0 auto 24px; font-weight: 400; }
+    .btns { margin-top: 28px; }
     .btn {
       display: inline-block;
-      padding: 14px 24px;
-      border-radius: 12px;
-      margin-right: 16px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      margin: 0 10px;
       text-decoration: none;
       font-size: 16px;
       font-weight: 600;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-    .btn-primary { background: var(--accent); color: #071023; }
-    .btn-ghost { border: 1px solid rgba(255,255,255,0.08); color: var(--muted); }
-    .showreel { flex: 1; max-width: 680px; }
-    .card { background: var(--card); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
-    .video { width: 100%; height: 400px; border: 0; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { border: 1px solid rgba(255,255,255,0.1); color: var(--muted); }
+    .showreel { max-width: 720px; margin: 40px auto 0; }
+    .card { background: var(--card); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); }
+    .video { width: 100%; height: 420px; border: 0; }
 
     /* Services */
     .section { padding: 80px 0; }
     .grid { display: grid; gap: 24px; }
-    .services .grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .services .grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
     .service {
       background: var(--glass);
-      padding: 24px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.05);
+      padding: 28px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
       font-size: 16px;
       font-weight: 500;
+      text-align: center;
       transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
     }
     .service:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      border-color: rgba(255,125,24,0.2);
+      transform: translateY(-12px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+      border-color: var(--accent-light);
     }
+
+    /* Testimonials */
+    .testimonials .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .testimonial {
+      background: var(--glass);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .testimonial:hover { transform: translateY(-8px); }
+    .testimonial p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+    .testimonial h4 { margin: 12px 0 8px; color: var(--accent); font-size: 18px; font-weight: 600; }
+    .testimonial .role { font-size: 14px; color: var(--muted); font-weight: 400; }
 
     /* News */
     .news .item {
-      padding: 24px;
-      border-radius: 14px;
+      padding: 28px;
+      border-radius: 16px;
       background: var(--glass);
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
       transition: transform 0.3s ease;
     }
-    .news .item:hover { transform: translateY(-5px); }
+    .news .item:hover { transform: translateY(-8px); }
     .news .date { color: var(--muted); font-size: 14px; font-weight: 400; }
     .news h4 { margin: 8px 0; color: var(--accent); font-size: 20px; font-weight: 600; }
 
     /* Gallery */
-    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .gallery img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; display: block; transition: transform 0.4s ease, filter 0.4s ease; }
-    .gallery img:hover { transform: scale(1.06); filter: brightness(1.1); }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .gallery img { width: 100%; height: 240px; object-fit: cover; border-radius: 14px; display: block; transition: transform 0.4s ease, filter 0.4s ease; }
+    .gallery img:hover { transform: scale(1.08); filter: brightness(1.15); }
 
     /* Team */
-    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-    .member { background: var(--glass); padding: 20px; border-radius: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s ease; }
-    .member:hover { transform: translateY(-5px); }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .member { background: var(--glass); padding: 24px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s ease; }
+    .member:hover { transform: translateY(-8px); }
     .avatar {
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      margin: 0 auto 14px;
+      margin: 0 auto 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 700;
-      color: #071023;
-      background: linear-gradient(90deg, var(--accent), #ffd66b);
+      color: #fff;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
     }
     .role { color: var(--muted); font-size: 14px; font-weight: 400; }
 
     /* Contact */
-    footer { padding: 64px 0; background: linear-gradient(180deg, rgba(0,0,0,0.08), transparent); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 460px; gap: 32px; }
+    footer { padding: 80px 0; background: linear-gradient(180deg, rgba(0,0,0,0.1), transparent); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 480px; gap: 40px; }
     .field {
       width: 100%;
-      padding: 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.03);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
       color: #fff;
       font-size: 16px;
       font-family: 'Inter', sans-serif;
     }
-    .field:focus { outline: none; border-color: var(--accent); }
+    .field:focus { outline: none; border-color: var(--accent-light); }
     .submit {
       background: var(--accent);
-      color: #071023;
-      padding: 14px 24px;
-      border-radius: 12px;
+      color: #fff;
+      padding: 16px 28px;
+      border-radius: 14px;
       border: 0;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .submit:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,122,24,0.3); }
+    .submit:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(255,140,0,0.3); }
 
     /* Footer small */
-    .small { color: var(--muted); text-align: center; margin-top: 32px; font-size: 14px; font-weight: 400; }
+    .small { color: var(--muted); text-align: center; margin-top: 40px; font-size: 14px; font-weight: 400; }
 
     /* Responsive Design */
     @media (max-width: 1024px) {
-      .hero { flex-direction: column; padding: 60px 0; }
-      .video { height: 300px; }
+      .hero { padding: 60px 0; }
+      .hero-video { height: 100%; }
+      .video { height: 320px; }
       .contact-grid { grid-template-columns: 1fr; }
       .container { padding: 24px 16px; }
-      .hero h2 { font-size: 42px; }
+      .hero h2 { font-size: 48px; }
       .hero p { font-size: 16px; }
-      .brand h1 { font-size: 20px; }
-      .brand img { width: 48px; height: 48px; }
+      .brand h1 { font-size: 22px; }
+      .brand img { width: 50px; height: 50px; }
     }
     @media (max-width: 768px) {
-      .nav { flex-direction: column; align-items: flex-start; }
-      nav a { margin: 6px 0; font-size: 15px; }
-      .cta { margin-top: 12px; padding: 10px 18px; font-size: 15px; }
-      .hero h2 { font-size: 36px; }
-      .video { height: 240px; }
-      .services .grid, .gallery, .team-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+      .hero h2 { font-size: 40px; }
+      .video { height: 260px; }
+      .services .grid, .gallery, .team-grid, .testimonials .grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
       .field, .submit { font-size: 15px; }
-      .btn { padding: 12px 20px; font-size: 15px; }
+      .btn { padding: 12px 24px; font-size: 15px; }
+      #sidebar-menu { width: 240px; right: -240px; }
+      #sidebar-menu a { font-size: 16px; }
     }
     @media (max-width: 480px) {
-      .hero h2 { font-size: 28px; }
+      .hero h2 { font-size: 32px; }
       .hero p { font-size: 14px; }
       .video { height: 200px; }
-      .services .grid, .gallery, .team-grid { grid-template-columns: 1fr; }
-      .news .item { padding: 18px; }
-      .brand h1 { font-size: 18px; }
+      .services .grid, .gallery, .team-grid, .testimonials .grid { grid-template-columns: 1fr; }
+      .news .item { padding: 20px; }
+      .brand h1 { font-size: 20px; }
       .brand p { font-size: 12px; }
       .container { padding: 16px 12px; }
+      #sidebar-menu { width: 200px; right: -200px; }
+      #hamburger-menu { width: 32px; height: 32px; }
     }
 
     /* Animations */
     .reveal { opacity: 0; transform: translateY(30px); }
+    .parallax { will-change: transform; }
   </style>
 </head>
 <body>
@@ -242,20 +322,30 @@
           <p>Cinematic Films • Ad Films • Post Production</p>
         </div>
       </div>
-      <nav class="desktop">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#news">News</a>
-        <a href="#team">Team</a>
-        <a href="#contact" class="cta">Contact</a>
-      </nav>
+      <input type="checkbox" id="hamburger-input" class="burger-shower" />
+      <label id="hamburger-menu" for="hamburger-input">
+        <nav id="sidebar-menu">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </label>
+      <div class="overlay"></div>
     </div>
   </header>
 
   <main>
     <section id="home" class="container hero">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="/assets/hero-bg.mp4" type="video/mp4">
+      </video>
       <div class="left reveal">
         <h2>We craft stories that move people</h2>
         <p>Full-service production house focused on films, advertisements, music videos, and end-to-end post-production. Our first major project <strong>Konkan Scales</strong> is currently in production.</p>
@@ -263,7 +353,7 @@
           <a class="btn btn-primary" href="#work">Watch Showreel</a>
           <a class="btn btn-ghost" href="#services">Our Services</a>
         </div>
-        <div style="margin-top:24px;color:var(--muted);font-size:14px;font-weight:400">50+ Projects • 10 Years • 20+ Awards • 100+ Clients</div>
+        <div style="margin-top:28px;color:var(--muted);font-size:14px;font-weight:400">50+ Projects • 10 Years • 20+ Awards • 100+ Clients</div>
       </div>
       <div class="showreel reveal">
         <div class="card">
@@ -273,7 +363,7 @@
     </section>
 
     <section id="services" class="container section services reveal">
-      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">Our Services</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;margin-bottom:28px;text-align:center">Our Services</h3>
       <div class="grid">
         <div class="service">Film & Ad Production — Concept to screen</div>
         <div class="service">Music Videos — Creative direction & production</div>
@@ -283,36 +373,52 @@
       </div>
     </section>
 
+    <section id="testimonials" class="container section testimonials reveal">
+      <h3 style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;margin-bottom:28px;text-align:center">What Our Clients Say</h3>
+      <div class="grid">
+        <div class="testimonial">
+          <p>"ShreemantYogi brought our vision to life with unparalleled creativity and professionalism. A true partner in storytelling!"</p>
+          <h4>Rahul Sharma</h4>
+          <div class="role">Brand Manager, Horizon Media</div>
+        </div>
+        <div class="testimonial">
+          <p>"Their attention to detail in post-production elevated our project to a whole new level. Highly recommended!"</p>
+          <h4>Priya Deshmukh</h4>
+          <div class="role">Independent Filmmaker</div>
+        </div>
+      </div>
+    </section>
+
     <section id="news" class="container section news reveal">
-      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">News & Updates</h3>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <h3 style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;margin-bottom:28px;text-align:center">News & Updates</h3>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
         <article class="item">
           <div class="date">Aug 2025</div>
           <h4>ShreemantYogi kicks off first feature film — Konkan Scales</h4>
-          <p style="color:var(--muted);font-size:15px;line-height:1.5">Our first big project is officially underway, capturing the cultural beauty of Konkan.</p>
+          <p style="color:var(--muted);font-size:15px;line-height:1.6">Our first big project is officially underway, capturing the cultural beauty of Konkan.</p>
         </article>
         <article class="item">
           <div class="date">Sep 2025</div>
           <h4>Office Expansion in Thane</h4>
-          <p style="color:var(--muted);font-size:15px;line-height:1.5">We are growing! New office space at Savitri Tower, Kalwa.</p>
+          <p style="color:var(--muted);font-size:15px;line-height:1.6">We are growing! New office space at Savitri Tower, Kalwa.</p>
         </article>
       </div>
     </section>
 
     <section id="gallery" class="container section reveal">
-      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">Gallery</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;margin-bottom:28px;text-align:center">Gallery</h3>
       <div class="gallery">
-        <img src="/assets/gallery1.png" alt="Film Production Scene">
-        <img src="/assets/gallery2.png" alt="Ad Film Shooting">
-        <img src="/assets/gallery3.png" alt="Music Video Set">
-        <img src="/assets/gallery4.png" alt="Post-Production Studio">
-        <img src="/assets/gallery5.png" alt="Event Coverage">
-        <img src="/assets/gallery6.png" alt="Konkan Scales Behind the Scenes">
+        <img class="parallax" src="/assets/gallery1.png" alt="Film Production Scene">
+        <img class="parallax" src="/assets/gallery2.png" alt="Ad Film Shooting">
+        <img class="parallax" src="/assets/gallery3.png" alt="Music Video Set">
+        <img class="parallax" src="/assets/gallery4.png" alt="Post-Production Studio">
+        <img class="parallax" src="/assets/gallery5.png" alt="Event Coverage">
+        <img class="parallax" src="/assets/gallery6.png" alt="Konkan Scales Behind the Scenes">
       </div>
     </section>
 
     <section id="team" class="container section reveal">
-      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">Team</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;margin-bottom:28px;text-align:center">Our Team</h3>
       <div class="team-grid">
         <div class="member">
           <div class="avatar">NP</div>
@@ -338,13 +444,13 @@
     </section>
 
     <section id="work" class="container section reveal">
-      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">Our Work</h3>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
-        <div class="item" style="padding:20px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,0.05)">
+      <h3 style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;margin-bottom:28px;text-align:center">Our Work</h3>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+        <div class="item" style="padding:24px;border-radius:14px;background:var(--card);border:1px solid rgba(255,255,255,0.06)">
           <div style="font-size:14px;color:var(--muted);font-weight:400">2025 • Feature Film (In Production)</div>
-          <h4 style="margin:8px 0;color:var(--accent);font-size:20px;font-weight:600">Konkan Scales</h4>
-          <p style="color:var(--muted);font-size:15px;line-height:1.5">Cultural drama set across the Konkan coast — currently shooting.</p>
-          <div style="margin-top:14px"><a class="btn btn-ghost" href="#contact">Join Production</a></div>
+          <h4 style="margin:10px 0;color:var(--accent);font-size:20px;font-weight:600">Konkan Scales</h4>
+          <p style="color:var(--muted);font-size:15px;line-height:1.6">Cultural drama set across the Konkan coast — currently shooting.</p>
+          <div style="margin-top:16px"><a class="btn btn-ghost" href="#contact">Join Production</a></div>
         </div>
       </div>
     </section>
@@ -354,14 +460,14 @@
     <div class="container">
       <div class="contact-grid">
         <div class="reveal">
-          <h3 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin:0 0 12px">Contact Us</h3>
-          <p style="color:var(--muted);font-size:16px;line-height:1.5;margin:0 0 16px">For collaborations, bookings, or press — reach out and we'll respond within 48 hours.</p>
-          <div style="color:var(--muted);font-size:15px;line-height:1.6;margin-bottom:16px">
+          <h3 style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin:0 0 16px">Contact Us</h3>
+          <p style="color:var(--muted);font-size:16px;line-height:1.6;margin:0 0 20px">For collaborations, bookings, or press — reach out and we'll respond within 48 hours.</p>
+          <div style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:20px">
             📍 Savitri Tower 202, Bhusarali, Kalwa, Thane 400605<br>
             📞 +91 99673 63589<br>
             ✉️ hello@shreemantyogi.com
           </div>
-          <div style="display:flex;gap:10px">
+          <div style="display:flex;gap:12px">
             <a class="btn btn-ghost" href="https://instagram.com/shreemantyogi" target="_blank">Instagram</a>
             <a class="btn btn-ghost" href="https://youtube.com/shreemantyogi" target="_blank">YouTube</a>
             <a class="btn btn-ghost" href="https://linkedin.com/company/shreemantyogi" target="_blank">LinkedIn</a>
@@ -369,13 +475,13 @@
         </div>
         <form class="reveal" onsubmit="event.preventDefault();alert('Form submitted - hook up your backend');">
           <input class="field" placeholder="Your name" required>
-          <div style="height:14px"></div>
+          <div style="height:16px"></div>
           <input class="field" type="email" placeholder="Email" required>
-          <div style="height:14px"></div>
+          <div style="height:16px"></div>
           <input class="field" placeholder="Phone (optional)">
-          <div style="height:14px"></div>
+          <div style="height:16px"></div>
           <textarea class="field" rows="6" placeholder="Brief about the project" required></textarea>
-          <div style="height:14px"></div>
+          <div style="height:16px"></div>
           <button class="submit" type="submit">Send Message</button>
         </form>
       </div>
@@ -407,16 +513,16 @@
     // Hero section animations
     gsap.from('.hero .left h2', {
       opacity: 0,
-      x: -60,
-      duration: 1.4,
+      x: -70,
+      duration: 1.5,
       ease: 'power3.out',
       scrollTrigger: { trigger: '.hero', start: 'top 90%' }
     });
 
     gsap.from('.hero .left p', {
       opacity: 0,
-      y: 25,
-      duration: 1.2,
+      y: 30,
+      duration: 1.3,
       delay: 0.2,
       ease: 'power3.out',
       scrollTrigger: { trigger: '.hero', start: 'top 90%' }
@@ -424,7 +530,7 @@
 
     gsap.from('.hero .btns .btn', {
       opacity: 0,
-      y: 25,
+      y: 30,
       duration: 1,
       stagger: 0.2,
       ease: 'power3.out',
@@ -433,8 +539,8 @@
 
     gsap.from('.showreel', {
       opacity: 0,
-      scale: 0.92,
-      duration: 1.4,
+      scale: 0.9,
+      duration: 1.5,
       ease: 'power3.out',
       scrollTrigger: { trigger: '.hero', start: 'top 90%' }
     });
@@ -443,7 +549,7 @@
     gsap.utils.toArray('.service').forEach((el, i) => {
       gsap.from(el, {
         opacity: 0,
-        y: 35,
+        y: 40,
         duration: 1,
         delay: i * 0.15,
         ease: 'power3.out',
@@ -451,27 +557,15 @@
       });
     });
 
-    // Gallery animation
-    gsap.utils.toArray('.gallery img').forEach((el, i) => {
+    // Testimonials animation
+    gsap.utils.toArray('.testimonial').forEach((el, i) => {
       gsap.from(el, {
         opacity: 0,
-        scale: 0.94,
-        duration: 1,
-        delay: i * 0.1,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.gallery', start: 'top 85%' }
-      });
-    });
-
-    // Team animation
-    gsap.utils.toArray('.member').forEach((el, i) => {
-      gsap.from(el, {
-        opacity: 0,
-        y: 35,
+        y: 40,
         duration: 1,
         delay: i * 0.15,
         ease: 'power3.out',
-        scrollTrigger: { trigger: '.team-grid', start: 'top 85%' }
+        scrollTrigger: { trigger: '.testimonials', start: 'top 85%' }
       });
     });
 
@@ -479,11 +573,40 @@
     gsap.utils.toArray('.news .item').forEach((el, i) => {
       gsap.from(el, {
         opacity: 0,
-        y: 35,
+        y: 40,
         duration: 1,
         delay: i * 0.15,
         ease: 'power3.out',
         scrollTrigger: { trigger: '.news', start: 'top 85%' }
+      });
+    });
+
+    // Gallery parallax animation
+    gsap.utils.toArray('.gallery .parallax').forEach((el, i) => {
+      gsap.fromTo(el, 
+        { y: -20 }, 
+        {
+          y: 20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        }
+      );
+    });
+
+    // Team animation
+    gsap.utils.toArray('.member').forEach((el, i) => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        delay: i * 0.15,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.team-grid', start: 'top 85%' }
       });
     });
 
@@ -495,6 +618,21 @@
           e.preventDefault();
           document.querySelector(href).scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+      });
+    });
+
+    // Close menu when clicking overlay or links
+    const hamburgerInput = document.getElementById('hamburger-input');
+    const overlay = document.querySelector('.overlay');
+    const sidebarLinks = document.querySelectorAll('#sidebar-menu a');
+
+    overlay.addEventListener('click', () => {
+      hamburgerInput.checked = false;
+    });
+
+    sidebarLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburgerInput.checked = false;
       });
     });
   </script>
