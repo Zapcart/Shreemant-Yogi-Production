@@ -3,90 +3,240 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ShreemantYogi Production</title>
+  <title>ShreemantYogi Production - Cinematic Films & Ad Production</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="ShreemantYogi Production is a full-service production house specializing in cinematic films, ad films, music videos, and post-production. Discover our award-winning projects like Konkan Scales.">
+  <meta name="keywords" content="ShreemantYogi Production, cinematic films, ad films, music videos, post-production, Konkan Scales, film production, Thane">
+  <meta name="author" content="ShreemantYogi Production">
+  <meta name="robots" content="index, follow">
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="ShreemantYogi Production - Cinematic Films & Ad Production">
+  <meta property="og:description" content="Crafting stories that move people through films, advertisements, and post-production. Explore our work and join our journey.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta property="og:url" content="https://www.shreemantyogi.com">
+  <meta property="og:type" content="website">
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ShreemantYogi Production - Cinematic Films & Ad Production">
+  <meta name="twitter:description" content="Crafting stories that move people through films, advertisements, and post-production. Explore our work and join our journey.">
+  <meta name="twitter:image" content="/assets/og-image.jpg">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- GSAP for Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
-    :root{
-      --bg-1:#050c1b; --bg-2:#071023; --accent:#ff7a18; --muted:#9aa4b2; --card:#0f1720;
-      --glass: rgba(255,255,255,0.04);
-      --max-w:1200px;
+    :root {
+      --bg-1: #050c1b;
+      --bg-2: #071023;
+      --accent: #ff7a18;
+      --muted: #b0b8c5;
+      --card: #0f1720;
+      --glass: rgba(255,255,255,0.06);
+      --max-w: 1280px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#fff; -webkit-font-smoothing:antialiased}
-    .container{max-width:var(--max-w);margin:0 auto;padding:28px}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 32px 24px; }
 
     /* NAV */
-    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,rgba(7,16,35,0.7),rgba(7,16,35,0.45));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .brand img{width:52px;height:52px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
-    .brand h1{font-family:'Playfair Display',serif;margin:0;font-size:20px;letter-spacing:0.6px}
-    .brand p{margin:0;color:var(--muted);font-size:13px}
-    nav a{color:rgba(255,255,255,0.92);text-decoration:none;margin:0 10px;font-weight:600}
-    .cta{background:var(--accent);color:#071023;padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(180deg, rgba(7,16,35,0.85), rgba(7,16,35,0.6));
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .brand img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow); }
+    .brand h1 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; letter-spacing: 0.5px; }
+    .brand p { font-size: 14px; color: var(--muted); font-weight: 400; }
+    nav a { color: rgba(255,255,255,0.95); text-decoration: none; margin: 0 12px; font-size: 16px; font-weight: 500; transition: color 0.3s ease; }
+    nav a:hover { color: var(--accent); }
+    .cta {
+      background: var(--accent);
+      color: #071023;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,122,24,0.3); }
 
     /* HERO */
-    .hero{display:flex;gap:32px;align-items:center;padding:60px 0}
-    .hero .left{flex:1}
-    .hero h2{font-family:'Playfair Display',serif;font-size:48px;margin:0 0 14px;line-height:1.02;background:linear-gradient(90deg,var(--accent),#ffd66b);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .hero p{color:var(--muted);max-width:620px}
-    .btns{margin-top:22px}
-    .btn{display:inline-block;padding:12px 18px;border-radius:12px;margin-right:12px;text-decoration:none;font-weight:700}
-    .btn-primary{background:var(--accent);color:#071023}
-    .btn-ghost{border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    .showreel{flex:1;max-width:640px}
-    .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(2,6,23,0.7)}
-    .video{width:100%;height:360px;border:0}
+    .hero { display: flex; gap: 40px; align-items: center; padding: 80px 0; }
+    .hero .left { flex: 1; }
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      font-weight: 700;
+      margin: 0 0 16px;
+      line-height: 1.1;
+      background: linear-gradient(90deg, var(--accent), #ffd66b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p { color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 680px; font-weight: 400; }
+    .btns { margin-top: 24px; }
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 12px;
+      margin-right: 16px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .btn-primary { background: var(--accent); color: #071023; }
+    .btn-ghost { border: 1px solid rgba(255,255,255,0.08); color: var(--muted); }
+    .showreel { flex: 1; max-width: 680px; }
+    .card { background: var(--card); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+    .video { width: 100%; height: 400px; border: 0; }
 
     /* Services */
-    .section{padding:64px 0}
-    .grid{display:grid;gap:18px}
-    .services .grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-    .service{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .35s,box-shadow .35s}
-    .service:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,0.6);border-color:rgba(255,125,24,0.18)}
+    .section { padding: 80px 0; }
+    .grid { display: grid; gap: 24px; }
+    .services .grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .service {
+      background: var(--glass);
+      padding: 24px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.05);
+      font-size: 16px;
+      font-weight: 500;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .service:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border-color: rgba(255,125,24,0.2);
+    }
 
     /* News */
-    .news .item{padding:20px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03)}
-    .news .date{color:var(--muted);font-size:13px}
-    .news h4{margin:6px 0;color:var(--accent)}
+    .news .item {
+      padding: 24px;
+      border-radius: 14px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: transform 0.3s ease;
+    }
+    .news .item:hover { transform: translateY(-5px); }
+    .news .date { color: var(--muted); font-size: 14px; font-weight: 400; }
+    .news h4 { margin: 8px 0; color: var(--accent); font-size: 20px; font-weight: 600; }
 
     /* Gallery */
-    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-    .gallery img{width:100%;height:200px;object-fit:cover;border-radius:10px;display:block;transition:transform .4s,filter .4s}
-    .gallery img:hover{transform:scale(1.04);filter:brightness(1.05)}
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .gallery img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; display: block; transition: transform 0.4s ease, filter 0.4s ease; }
+    .gallery img:hover { transform: scale(1.06); filter: brightness(1.1); }
 
     /* Team */
-    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
-    .member{background:var(--glass);padding:18px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.03)}
-    .avatar{width:86px;height:86px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#071023;background:linear-gradient(90deg,var(--accent),#ffd66b)}
-    .role{color:var(--muted);font-size:13px}
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .member { background: var(--glass); padding: 20px; border-radius: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s ease; }
+    .member:hover { transform: translateY(-5px); }
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: #071023;
+      background: linear-gradient(90deg, var(--accent), #ffd66b);
+    }
+    .role { color: var(--muted); font-size: 14px; font-weight: 400; }
 
     /* Contact */
-    footer{padding:56px 0;background:linear-gradient(180deg,rgba(0,0,0,0.05),transparent)}
-    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:24px}
-    .field{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);background:transparent;color:inherit}
-    .submit{background:var(--accent);color:#071023;padding:12px 16px;border-radius:10px;border:0;font-weight:700}
+    footer { padding: 64px 0; background: linear-gradient(180deg, rgba(0,0,0,0.08), transparent); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 460px; gap: 32px; }
+    .field {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: #fff;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+    }
+    .field:focus { outline: none; border-color: var(--accent); }
+    .submit {
+      background: var(--accent);
+      color: #071023;
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: 0;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .submit:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,122,24,0.3); }
 
     /* Footer small */
-    .small{color:var(--muted);text-align:center;margin-top:28px;font-size:14px}
+    .small { color: var(--muted); text-align: center; margin-top: 32px; font-size: 14px; font-weight: 400; }
 
-    /* responsive */
-    @media(max-width:900px){.hero{flex-direction:column}.video{height:220px}.contact-grid{grid-template-columns:1fr}.container{padding:18px}}
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero { flex-direction: column; padding: 60px 0; }
+      .video { height: 300px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .container { padding: 24px 16px; }
+      .hero h2 { font-size: 42px; }
+      .hero p { font-size: 16px; }
+      .brand h1 { font-size: 20px; }
+      .brand img { width: 48px; height: 48px; }
+    }
+    @media (max-width: 768px) {
+      .nav { flex-direction: column; align-items: flex-start; }
+      nav a { margin: 6px 0; font-size: 15px; }
+      .cta { margin-top: 12px; padding: 10px 18px; font-size: 15px; }
+      .hero h2 { font-size: 36px; }
+      .video { height: 240px; }
+      .services .grid, .gallery, .team-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+      .field, .submit { font-size: 15px; }
+      .btn { padding: 12px 20px; font-size: 15px; }
+    }
+    @media (max-width: 480px) {
+      .hero h2 { font-size: 28px; }
+      .hero p { font-size: 14px; }
+      .video { height: 200px; }
+      .services .grid, .gallery, .team-grid { grid-template-columns: 1fr; }
+      .news .item { padding: 18px; }
+      .brand h1 { font-size: 18px; }
+      .brand p { font-size: 12px; }
+      .container { padding: 16px 12px; }
+    }
 
-    /* simple fade-in on scroll */
-    .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
-    .reveal.in-view{opacity:1;transform:none}
-
+    /* Animations */
+    .reveal { opacity: 0; transform: translateY(30px); }
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
       <div class="brand">
-        <img src="/assets/logo.png" alt="logo">
+        <img src="/assets/logo.png" alt="ShreemantYogi Production Logo">
         <div>
           <h1>ShreemantYogi Production</h1>
           <p>Cinematic Films • Ad Films • Post Production</p>
@@ -108,22 +258,22 @@
     <section id="home" class="container hero">
       <div class="left reveal">
         <h2>We craft stories that move people</h2>
-        <p>Full-service production house focused on films, advertisements, music videos and end-to-end post production. Our first major project <strong>Konkan Scales</strong> is currently in production.</p>
+        <p>Full-service production house focused on films, advertisements, music videos, and end-to-end post-production. Our first major project <strong>Konkan Scales</strong> is currently in production.</p>
         <div class="btns">
           <a class="btn btn-primary" href="#work">Watch Showreel</a>
           <a class="btn btn-ghost" href="#services">Our Services</a>
         </div>
-        <div style="margin-top:22px;color:var(--muted)">50+ Projects • 10 Years • 20+ Awards • 100+ Clients</div>
+        <div style="margin-top:24px;color:var(--muted);font-size:14px;font-weight:400">50+ Projects • 10 Years • 20+ Awards • 100+ Clients</div>
       </div>
       <div class="showreel reveal">
         <div class="card">
-          <iframe class="video" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+          <iframe class="video" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="ShreemantYogi Production Showreel" allowfullscreen></iframe>
         </div>
       </div>
     </section>
 
     <section id="services" class="container section services reveal">
-      <h3 style="font-size:32px;margin-bottom:18px">Our Services</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">Our Services</h3>
       <div class="grid">
         <div class="service">Film & Ad Production — Concept to screen</div>
         <div class="service">Music Videos — Creative direction & production</div>
@@ -134,126 +284,219 @@
     </section>
 
     <section id="news" class="container section news reveal">
-      <h3 style="font-size:32px;margin-bottom:18px">News & Updates</h3>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">News & Updates</h3>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
         <article class="item">
           <div class="date">Aug 2025</div>
           <h4>ShreemantYogi kicks off first feature film — Konkan Scales</h4>
-          <p style="color:var(--muted)">Our first big project is officially underway, capturing the cultural beauty of Konkan.</p>
+          <p style="color:var(--muted);font-size:15px;line-height:1.5">Our first big project is officially underway, capturing the cultural beauty of Konkan.</p>
         </article>
-
         <article class="item">
           <div class="date">Sep 2025</div>
           <h4>Office Expansion in Thane</h4>
-          <p style="color:var(--muted)">We are growing! New office space at Savitri Tower, Kalwa.</p>
+          <p style="color:var(--muted);font-size:15px;line-height:1.5">We are growing! New office space at Savitri Tower, Kalwa.</p>
         </article>
       </div>
     </section>
 
     <section id="gallery" class="container section reveal">
-      <h3 style="font-size:32px;margin-bottom:18px">Gallery</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">Gallery</h3>
       <div class="gallery">
-        <img src="/assets/gallery1.png" alt="gallery 1">
-        <img src="/assets/gallery2.png" alt="gallery 2">
-        <img src="/assets/gallery3.png" alt="gallery 3">
-        <img src="/assets/gallery4.png" alt="gallery 4">
-        <img src="/assets/gallery5.png" alt="gallery 5">
-        <img src="/assets/gallery6.png" alt="gallery 6">
+        <img src="/assets/gallery1.png" alt="Film Production Scene">
+        <img src="/assets/gallery2.png" alt="Ad Film Shooting">
+        <img src="/assets/gallery3.png" alt="Music Video Set">
+        <img src="/assets/gallery4.png" alt="Post-Production Studio">
+        <img src="/assets/gallery5.png" alt="Event Coverage">
+        <img src="/assets/gallery6.png" alt="Konkan Scales Behind the Scenes">
       </div>
     </section>
 
     <section id="team" class="container section reveal">
-      <h3 style="font-size:32px;margin-bottom:18px">Team</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">Team</h3>
       <div class="team-grid">
         <div class="member">
           <div class="avatar">NP</div>
-          <div style="font-weight:700">Nilesh Pawar</div>
+          <div style="font-weight:600;font-size:16px">Nilesh Pawar</div>
           <div class="role">Founder & Director</div>
         </div>
         <div class="member">
           <div class="avatar">TV</div>
-          <div style="font-weight:700">Tanmay Vanghule</div>
+          <div style="font-weight:600;font-size:16px">Tanmay Vanghule</div>
           <div class="role">Head of Production</div>
         </div>
         <div class="member">
           <div class="avatar">RK</div>
-          <div style="font-weight:700">Riyaz Khan</div>
+          <div style="font-weight:600;font-size:16px">Riyaz Khan</div>
           <div class="role">Head of Production</div>
         </div>
         <div class="member">
           <div class="avatar">AS</div>
-          <div style="font-weight:700">Ahsan Shaikh</div>
+          <div style="font-weight:600;font-size:16px">Ahsan Shaikh</div>
           <div class="role">Online Work Manager</div>
         </div>
       </div>
     </section>
 
     <section id="work" class="container section reveal">
-      <h3 style="font-size:32px;margin-bottom:18px">Our Work</h3>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-        <div class="item" style="padding:18px;border-radius:10px;background:var(--card);border:1px solid rgba(255,255,255,0.03)">
-          <div style="font-size:14px;color:var(--muted)">2025 • Feature Film (In Production)</div>
-          <h4 style="margin:8px 0;color:var(--accent)">Konkan Scales</h4>
-          <p style="color:var(--muted)">Cultural drama set across the Konkan coast — currently shooting.</p>
-          <div style="margin-top:12px"><a class="btn btn-ghost" href="#contact">Join Production</a></div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:24px">Our Work</h3>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+        <div class="item" style="padding:20px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,0.05)">
+          <div style="font-size:14px;color:var(--muted);font-weight:400">2025 • Feature Film (In Production)</div>
+          <h4 style="margin:8px 0;color:var(--accent);font-size:20px;font-weight:600">Konkan Scales</h4>
+          <p style="color:var(--muted);font-size:15px;line-height:1.5">Cultural drama set across the Konkan coast — currently shooting.</p>
+          <div style="margin-top:14px"><a class="btn btn-ghost" href="#contact">Join Production</a></div>
         </div>
       </div>
     </section>
-
   </main>
 
   <footer id="contact">
     <div class="container">
       <div class="contact-grid">
         <div class="reveal">
-          <h3 style="font-size:24px;margin:0 0 8px">Contact Us</h3>
-          <p style="color:var(--muted);margin:0 0 12px">For collaborations, bookings, or press — reach out and we'll respond within 48 hours.</p>
-          <div style="color:var(--muted);margin-bottom:12px">📍 Savitri Tower 202, Bhusarali, Kalwa, Thane 400605<br>📞 +91 99673 63589<br>✉️ hello@shreemantyogi.com</div>
-          <div style="display:flex;gap:8px">
-            <a class="btn btn-ghost" href="#">Instagram</a>
-            <a class="btn btn-ghost" href="#">YouTube</a>
-            <a class="btn btn-ghost" href="#">LinkedIn</a>
+          <h3 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin:0 0 12px">Contact Us</h3>
+          <p style="color:var(--muted);font-size:16px;line-height:1.5;margin:0 0 16px">For collaborations, bookings, or press — reach out and we'll respond within 48 hours.</p>
+          <div style="color:var(--muted);font-size:15px;line-height:1.6;margin-bottom:16px">
+            📍 Savitri Tower 202, Bhusarali, Kalwa, Thane 400605<br>
+            📞 +91 99673 63589<br>
+            ✉️ hello@shreemantyogi.com
+          </div>
+          <div style="display:flex;gap:10px">
+            <a class="btn btn-ghost" href="https://instagram.com/shreemantyogi" target="_blank">Instagram</a>
+            <a class="btn btn-ghost" href="https://youtube.com/shreemantyogi" target="_blank">YouTube</a>
+            <a class="btn btn-ghost" href="https://linkedin.com/company/shreemantyogi" target="_blank">LinkedIn</a>
           </div>
         </div>
-
         <form class="reveal" onsubmit="event.preventDefault();alert('Form submitted - hook up your backend');">
           <input class="field" placeholder="Your name" required>
-          <div style="height:12px"></div>
+          <div style="height:14px"></div>
           <input class="field" type="email" placeholder="Email" required>
-          <div style="height:12px"></div>
+          <div style="height:14px"></div>
           <input class="field" placeholder="Phone (optional)">
-          <div style="height:12px"></div>
+          <div style="height:14px"></div>
           <textarea class="field" rows="6" placeholder="Brief about the project" required></textarea>
-          <div style="height:12px"></div>
+          <div style="height:14px"></div>
           <button class="submit" type="submit">Send Message</button>
         </form>
       </div>
-
       <div class="small">© 2025 ShreemantYogi Production — All rights reserved.</div>
     </div>
   </footer>
 
   <script>
-    // small script to reveal elements on scroll
-    (function(){
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e=>{
-          if(e.isIntersecting) e.target.classList.add('in-view');
-        });
-      },{threshold:0.12});
+    gsap.registerPlugin(ScrollTrigger);
 
-      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-      // smooth links
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click',e=>{
-          const href=a.getAttribute('href');
-          if(href.length>1){
-            e.preventDefault();document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
+    // Animate reveal elements
+    gsap.utils.toArray('.reveal').forEach(el => {
+      gsap.fromTo(el, 
+        { opacity: 0, y: 30 }, 
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1.2, 
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
           }
-        })
-      })
-    })();
+        }
+      );
+    });
+
+    // Hero section animations
+    gsap.from('.hero .left h2', {
+      opacity: 0,
+      x: -60,
+      duration: 1.4,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.hero', start: 'top 90%' }
+    });
+
+    gsap.from('.hero .left p', {
+      opacity: 0,
+      y: 25,
+      duration: 1.2,
+      delay: 0.2,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.hero', start: 'top 90%' }
+    });
+
+    gsap.from('.hero .btns .btn', {
+      opacity: 0,
+      y: 25,
+      duration: 1,
+      stagger: 0.2,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.hero', start: 'top 90%' }
+    });
+
+    gsap.from('.showreel', {
+      opacity: 0,
+      scale: 0.92,
+      duration: 1.4,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.hero', start: 'top 90%' }
+    });
+
+    // Services animation
+    gsap.utils.toArray('.service').forEach((el, i) => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 35,
+        duration: 1,
+        delay: i * 0.15,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.services', start: 'top 85%' }
+      });
+    });
+
+    // Gallery animation
+    gsap.utils.toArray('.gallery img').forEach((el, i) => {
+      gsap.from(el, {
+        opacity: 0,
+        scale: 0.94,
+        duration: 1,
+        delay: i * 0.1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.gallery', start: 'top 85%' }
+      });
+    });
+
+    // Team animation
+    gsap.utils.toArray('.member').forEach((el, i) => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 35,
+        duration: 1,
+        delay: i * 0.15,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.team-grid', start: 'top 85%' }
+      });
+    });
+
+    // News animation
+    gsap.utils.toArray('.news .item').forEach((el, i) => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 35,
+        duration: 1,
+        delay: i * 0.15,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.news', start: 'top 85%' }
+      });
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href.length > 1) {
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   </script>
 </body>
 </html>
