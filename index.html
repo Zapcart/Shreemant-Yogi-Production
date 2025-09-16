@@ -30,15 +30,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
     :root {
-      --bg-1: #0a0f24;
-      --bg-2: #1a2238;
-      --accent: #ff8c00;
-      --accent-light: #ffb347;
-      --muted: #c4cdd5;
-      --card: #141b2d;
-      --glass: rgba(255,255,255,0.08);
+      --bg-1: #000000;
+      --bg-2: #1a1a1a;
+      --accent: #ffffff;
+      --accent-light: #e0e0e0;
+      --muted: #b0b0b0;
+      --card: #1c1c1c;
+      --glass: rgba(255,255,255,0.1);
       --max-w: 1320px;
-      --shadow: 0 12px 32px rgba(0,0,0,0.5);
+      --shadow: 0 12px 32px rgba(0,0,0,0.6);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -56,14 +56,14 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: linear-gradient(180deg, rgba(10,15,36,0.9), rgba(10,15,36,0.7));
+      background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; }
     .brand { display: flex; align-items: center; gap: 16px; }
     .brand img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow); }
-    .brand h1 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.5px; }
+    .brand h1 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.5px; color: var(--accent); }
     .brand p { font-size: 14px; color: var(--muted); font-weight: 400; }
 
     /* Hamburger Menu */
@@ -92,7 +92,7 @@
       width: 280px;
       height: 100%;
       background: var(--bg-2);
-      padding: 80px 24px 24px;
+      padding: 24px;
       transition: right 0.4s ease;
       z-index: 60;
       box-shadow: -12px 0 24px rgba(0,0,0,0.5);
@@ -100,7 +100,7 @@
     #sidebar-menu ul { list-style: none; }
     #sidebar-menu a {
       display: block;
-      color: #fff;
+      color: var(--accent-light);
       font-size: 18px;
       padding: 14px 0;
       text-decoration: none;
@@ -128,6 +128,18 @@
       transition: opacity 0.4s ease;
       z-index: 55;
     }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .close-btn:hover { color: var(--accent-light); }
 
     /* HERO */
     .hero { position: relative; padding: 100px 0; text-align: center; }
@@ -138,7 +150,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.3;
+      opacity: 0.25;
       z-index: -1;
     }
     .hero .left { max-width: 800px; margin: 0 auto; }
@@ -165,9 +177,9 @@
       font-weight: 600;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-ghost { border: 1px solid rgba(255,255,255,0.1); color: var(--muted); }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-ghost { border: 1px solid rgba(255,255,255,0.15); color: var(--muted); }
     .showreel { max-width: 720px; margin: 40px auto 0; }
     .card { background: var(--card); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); }
     .video { width: 100%; height: 420px; border: 0; }
@@ -180,7 +192,7 @@
       background: var(--glass);
       padding: 28px;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
       font-size: 16px;
       font-weight: 500;
       text-align: center;
@@ -188,7 +200,7 @@
     }
     .service:hover {
       transform: translateY(-12px);
-      box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.6);
       border-color: var(--accent-light);
     }
 
@@ -198,7 +210,7 @@
       background: var(--glass);
       padding: 24px;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
       text-align: center;
       transition: transform 0.3s ease;
     }
@@ -212,7 +224,7 @@
       padding: 28px;
       border-radius: 16px;
       background: var(--glass);
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
       transition: transform 0.3s ease;
     }
     .news .item:hover { transform: translateY(-8px); }
@@ -226,7 +238,7 @@
 
     /* Team */
     .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
-    .member { background: var(--glass); padding: 24px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s ease; }
+    .member { background: var(--glass); padding: 24px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.08); transition: transform 0.3s ease; }
     .member:hover { transform: translateY(-8px); }
     .avatar {
       width: 100px;
@@ -238,20 +250,20 @@
       justify-content: center;
       font-size: 28px;
       font-weight: 700;
-      color: #fff;
+      color: #000;
       background: linear-gradient(90deg, var(--accent), var(--accent-light));
     }
     .role { color: var(--muted); font-size: 14px; font-weight: 400; }
 
     /* Contact */
-    footer { padding: 80px 0; background: linear-gradient(180deg, rgba(0,0,0,0.1), transparent); }
+    footer { padding: 80px 0; background: linear-gradient(180deg, rgba(0,0,0,0.15), transparent); }
     .contact-grid { display: grid; grid-template-columns: 1fr 480px; gap: 40px; }
     .field {
       width: 100%;
       padding: 16px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
       color: #fff;
       font-size: 16px;
       font-family: 'Inter', sans-serif;
@@ -259,7 +271,7 @@
     .field:focus { outline: none; border-color: var(--accent-light); }
     .submit {
       background: var(--accent);
-      color: #fff;
+      color: #000;
       padding: 16px 28px;
       border-radius: 14px;
       border: 0;
@@ -268,7 +280,7 @@
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .submit:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(255,140,0,0.3); }
+    .submit:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(255,255,255,0.2); }
 
     /* Footer small */
     .small { color: var(--muted); text-align: center; margin-top: 40px; font-size: 14px; font-weight: 400; }
@@ -305,6 +317,7 @@
       .container { padding: 16px 12px; }
       #sidebar-menu { width: 200px; right: -200px; }
       #hamburger-menu { width: 32px; height: 32px; }
+      .close-btn { font-size: 20px; }
     }
 
     /* Animations */
@@ -325,6 +338,7 @@
       <input type="checkbox" id="hamburger-input" class="burger-shower" />
       <label id="hamburger-menu" for="hamburger-input">
         <nav id="sidebar-menu">
+          <button class="close-btn" onclick="document.getElementById('hamburger-input').checked = false;">✕</button>
           <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#work">Work</a></li>
@@ -446,7 +460,7 @@
     <section id="work" class="container section reveal">
       <h3 style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;margin-bottom:28px;text-align:center">Our Work</h3>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
-        <div class="item" style="padding:24px;border-radius:14px;background:var(--card);border:1px solid rgba(255,255,255,0.06)">
+        <div class="item" style="padding:24px;border-radius:14px;background:var(--card);border:1px solid rgba(255,255,255,0.08)">
           <div style="font-size:14px;color:var(--muted);font-weight:400">2025 • Feature Film (In Production)</div>
           <h4 style="margin:10px 0;color:var(--accent);font-size:20px;font-weight:600">Konkan Scales</h4>
           <p style="color:var(--muted);font-size:15px;line-height:1.6">Cultural drama set across the Konkan coast — currently shooting.</p>
